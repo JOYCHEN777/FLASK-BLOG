@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='mystyle.css') }}" type="text/css">
+        <link href="/favicon.icon" rel="shortcut icon" type="image/x-icon"/>
+        {% if title %}
+            <title>{{ title }} - MicroBlog</title>
+        {% else %}
+            <title>My Wonderful Site</title>
+        {% endif %}
+    {% endblock head %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <h1 class="navbar-brand" href="/">MicroBlog</h1>
+        <h4 class="text-muted">&nbsp;&nbsp;&nbsp;&nbsp;Designed by Yan Chen.</h4>
+        <div class="collapse navbar-collapse div-inline" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li><a href="{{ url_for('home') }}" class="nav-item nav-link ">Home</a></li>
+
+                <li><a href="{{ url_for('post_blog') }}" class="nav-item nav-link ">Post a new blog</a></li>
+
+                <li><a href="{{ url_for('all_posts') }}" class="nav-item nav-link ">View all posts</a></li>
+
+                <li><a href="{{ url_for('search') }}" class="nav-item nav-link ">Search</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('logout') }}" class="nav-item nav-link ">Logout</a></li>
+                    <li><a href="{{ url_for('user', username=current_user.username) }}"
+                           class="nav-item nav-link ">Profile</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" class="nav-item nav-link ">Login/Register</a></li>
+
+                {% endif %}
+            </ul>
+        </div>
+        <div class="div-inline" id="welcome">
+            {% if current_user.is_authenticated %}
+                Hello, {{ current_user.username }}!
+            {% else %}
+                Hello, Guest!
+            {% endif %}
+        </div>
+</nav>
+<div id="flashes">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                    <li><span style="color: #e00a0a;">{{ message }}</span></li>
+                {% endfor %}
+            </ul>
+            <hr>
+        {% endif %}
+    {% endwith %}
+</div>
+<main class="main_container">
+    <div class="page-header">
+        <h1 id="display-3">{{ title }}</h1>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+<footer class="footer" id="changefooter">
+    <div class="container">
+        <a href="{{ url_for('about') }}" target="_blank" class="footer-main-link">About</a>
+        &nbsp;&nbsp;<a href="https://git.cardiff.ac.uk/c1993394/flask-blog" target="_blank" class="footer-main-link">GitLab</a>
+        <small>
+            <span class="float-right" id="copyright">© 2021  Yan Chen.</span>
+        </small>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row h-100 justify-content-center" id="search">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.type }}
+                {{ form.info(cols=25, rows=1) }}
+                {{ form.submit() }}
+            </p>
+
+        </form>
+    </div>
+{% endblock %}

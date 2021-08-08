@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% if posts %}
+        <div class="col-sm-8">
+            {% for post in posts %}
+                <p>
+                    {% include '_post.html' %}
+                </p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>No results for "{{ info }}"</h1><br>
+    {% endif %}
+{% endblock content %}

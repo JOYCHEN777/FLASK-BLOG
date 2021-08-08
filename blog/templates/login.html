@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row h-100 justify-content-center"  id="login">
+        <form method="POST" action="" class="form col-6" >
+            {{ form.csrf_token }}
+            <div class="form-group required">
+                <label>{{ form.email.label }}</label><br>
+                {{ form.email }}<br>
+                {% for error in form.email.errors %}
+                    <span class="form-error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+            <div class="form-group required">
+                {{ form.password.label }}<br>{{ form.password }}
+            </div>
+            <div>
+                {{ form.remember_me }}{{ form.remember_me.label }}
+            </div>
+            <input type="submit" value="Login" class="btn btn-primary btn-md">
+            <br>
+        </form>
+
+    </div>
+    <div class="row h-100 justify-content-center"><em><strong>New User?</strong></em>&nbsp <a href="{{ url_for('register') }}">Click to Register!</a>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="page-header post-container">
+        <h1>{{ post.title }}
+        </h1>
+        <small>
+            Author: <small class="small-color">{{ post.user.username }}</small><br>
+            Date: <span class="" data-timestamp="2018-07-31T11:51:22Z" data-function="format" data-format="LL"
+                        data-refresh="0" style="">{{ post.date }}</span>
+            <span class="float-right">rate:&nbsp;<small class="small-color">{{ post.average_rate }}</small>&nbsp;|&nbsp;
+    <small class="small-color">{{ post.rate_num }}</small>&nbsp ratings</span>
+        </small>
+        <hr>
+        <img src="{{ url_for('static', filename='img/' + post.image_file) }}" id="post-picture">
+        <p>{{ post.content }}</p>
+        <hr>
+        <form method="POST" action="{{ url_for('post_comment', post_id=post.id) }}">
+            {{ c_form.hidden_tag() }}
+            <div class="">
+                {{ c_form.comment.label }}:{{ c_form.comment }} {% for error in c_form.comment.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+                {{ c_form.submit() }}</div>
+        </form>
+        {% if state==False %}
+            <form method="POST" action="{{ url_for('rate', post_id=post.id) }}">
+            {{ r_form.hidden_tag() }}
+            <div class="">
+                give a rate:{{ r_form.rate }}
+                {{ r_form.submit() }}</div>
+        {% else %}
+            <div class="">
+                You have already rated this blog.
+            </div>
+        {% endif %}
+        </form>
+        <hr>
+
+        <h3>Comments:</h3>
+        {% for comment in comments %}
+            {% include '_comment.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock content %}

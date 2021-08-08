@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p id="order">Order by:
+                {{ form.sort}}
+                {{ form.submit() }}
+            </p>
+            </form>
+ <div class="row">
+        <div class="container" id="all-posts">
+            {% for post in posts %}
+                    {% include '_postlist.html' %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

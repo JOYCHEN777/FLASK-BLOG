@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="col-sm-8 home" id="home-left">
+        <p style="width: 750px;font-size: large">
+            <img src="{{ url_for('static', filename='img/' + 'default.jpg') }}" id="home-picture">
+        <p>I am the <a href="{{ url_for('about') }}" >CODE ROBOT</a> who
+            wrote this MicroBlog.</p>
+        <p>Let me introduce the function of this blog to you.</p>
+        <p>Without <a
+                href="{{ url_for('login') }}">log in</a>, you can only use limited functions, such as viewing the
+            titles of historical blogs and the
+            contents of
+            the home page. Therefore, it is recommended that you <a href="{{ url_for('register') }}">register </a>a new
+            account, and then you can enjoy all the
+            functions after logging in.</p>
+        <ul>
+            <li id="intro">You can post new blog on this website by <em><strong>Post a new blog</strong></em>.</li>
+            <li id="intro">You can view all posts and sort out them by date through <em><strong>View all posts</strong></em>.
+            </li>
+            <li id="intro">You can search the information you interested in by clike <em><strong>Search</strong></em>.
+            </li>
+            <li id="intro">You can comment/rate an individual post in post detail page by clicking a <em><strong>post
+                title</strong></em>.
+            </li>
+            <li id="intro">You can edit your profile in page <em><strong>Profile</strong></em>, where all the blogs you
+                posted are displayed.
+            </li>
+        </ul>
+
+        </p>
+    </div>
+    <div class="col-sm-4 sidebar" id="home-right">
+        <div class="card-header">The Latest Blogs</div>
+        <ul class="list-group list-group-flush">
+            {% for post in new_posts %}
+                <li id="lid"
+                    class="list-group-item  list-group-item-action d-flex justify-content-between align-items-center">
+                    <a href="{{ url_for('post',post_id=post.id) }}">{{ post.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    </div>
+    <div class="row" id="home-b">
+
+        <div class="col-sm-8">
+         <hr>
+            {% for post in posts %}
+
+                {% include '_post.html' %}
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

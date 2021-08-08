@@ -1,0 +1,13 @@
+<h3 class="text-primary"><a href="{{ url_for('post',post_id=post.id) }}">{{ post.title }}</a></h3>
+<div id="averter"><img src="{{ post.user.avatar(32) }}"></div>
+<span class="author">&nbsp;{{ post.user.username }}&nbsp;&nbsp;&nbsp;</span>
+<p class="post-content">{{ post.content }}</p>
+ <img src="{{ url_for('static', filename='img/' + post.image_file) }}" id="list-picture">
+<small><a href="{{ url_for('post',post_id=post.id) }}">Read more</a></small><br>
+<small>
+    rate:&nbsp;<small class="small-color">{{ post.average_rate }}</small>&nbsp;|&nbsp;
+    <small class="small-color">{{ post.rate_num }}</small>&nbsp ratings
+    <span class="float-right"><span class="" data-timestamp="2018-07-31T11:51:22Z" data-function="format"
+                                    data-format="LL" data-refresh="0" style="">{{ post.date }}</span></span>
+</small>
+<hr>
